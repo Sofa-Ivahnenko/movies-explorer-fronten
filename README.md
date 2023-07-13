@@ -66,7 +66,7 @@
 ###
 [Movies-explorer](https://diplom.movies.nomoredomains.work)  
 
-[Макет сайта в Figma](https://www.figma.com/file/YnRLfQ6IWRm7sHT000zof9/Diploma-(Copy)?node-id=932%3A2618&t=9RIy8NBpB4s9Nn1s-0)  
+[Макет сайта в Figma](https://www.figma.com/file/ipcOMafEhdScym4b819MTW/Diploma-(Copy)?type=design&node-id=932%3A4182&mode=design&t=wdCjXQET4XZP0cIq-1)  
 
 
 
