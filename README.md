@@ -1,4 +1,4 @@
-# 🎞️ [Movies-explorer](https://beatfilm.learnproject.nomoredomains.icu/)
+# 🎞️ [Movies-explorer](https://diplom.movies.nomoredomains.work/)
 
 ### Что это?  
 Данный проект является примером веб-сервиса по поиску фильмов.  
