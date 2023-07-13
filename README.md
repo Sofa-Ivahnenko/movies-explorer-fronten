@@ -20,7 +20,7 @@
 1. https://api.nomoreparties.co/beatfilm-movies;  
     Открытый сервис, с которого забираем все данные.  
 
-2. https://api.beatfilm.learnproject.nomoredomains.icu/;  
+2. https://api.diplom.movies.nomoredomains.work;  
     Серверная часть, написанная мной, к которой мы обращаемся, чтобы    
     получить список избранных элементов, добавить-удалить из избранного    
     фильм, зарегистрироваться-авторизоваться-получить токен, изменить   
@@ -64,11 +64,9 @@
 переадресация на страницу ERROR.  
 
 ###
-[Movies-explorer](https://beatfilm.learnproject.nomoredomains.icu/)  
+[Movies-explorer](https://diplom.movies.nomoredomains.work)  
 
 [Макет сайта в Figma](https://www.figma.com/file/YnRLfQ6IWRm7sHT000zof9/Diploma-(Copy)?node-id=932%3A2618&t=9RIy8NBpB4s9Nn1s-0)  
-
-[Репозиторий бэкенда для этого сайта](https://github.com/IgorDetkin/movies-explorer-api)
 
 
 

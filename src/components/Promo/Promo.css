@@ -29,6 +29,7 @@
   text-align: left;
   margin-bottom: 36px;
   max-width: 640px;
+  margin-top: 0;
 }
 
 .promo__subtitle {
@@ -42,6 +43,7 @@
   width: 310px;
   opacity: 0.5;
   margin-bottom: 146px;
+  margin-top: 0;
 }
 
 .promo__button {

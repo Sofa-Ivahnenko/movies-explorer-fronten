@@ -1,5 +1,5 @@
 
-export const baseUrl = "https://api.beatfilm.learnproject.nomoredomains.icu";
+export const baseUrl = "https://api.diplom.movies.nomoredomains.work";
 // export const baseUrl = 'http://localhost:3000';
 
 
