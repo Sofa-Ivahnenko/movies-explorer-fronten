@@ -65,7 +65,7 @@
 }
 
 .card__button_active {
-	background: #f9f9f9 url('../../images/icon-saved-active.svg') center / 14px no-repeat;
+	background: url('../../images/icon-saved-active.svg') center / 14px no-repeat;
 
 }
 
