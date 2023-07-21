@@ -3,7 +3,6 @@ import { Link, Route, Switch } from "react-router-dom";
 import "./RegLogin.css";
 import logo from "../../images/logo.svg";
 
-//ВЁРСТКУ ПЕРЕДЕЛАТЬ!!!!!!
 
 function RegLogin(props) {
 
