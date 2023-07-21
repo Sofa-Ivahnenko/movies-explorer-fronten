@@ -8,7 +8,7 @@ const SearchForm = () => {
 				<button type="submit" className="search__button"></button>
 				<div className="search__toggle">
 					<label className="search__tumbler">
-						<input type="checkbox" className="search__checkbox" />
+						<input type="checkbox" className="search__checkbox" placeholder="Чекбокс" />
 						<span className="search__slider" />
 					</label>
 					<p className="search__films">Короткометражки</p>
@@ -16,7 +16,7 @@ const SearchForm = () => {
 			</div>
 			<div className="search__toggle search__toggle-update">
 				<label className="search__tumbler">
-					<input type="checkbox" className="search__checkbox" />
+					<input type="checkbox" className="search__checkbox" placeholder="Чекбокс" />
 					<span className="search__slider" />
 				</label>
 				<p className="search__films">Короткометражки</p>

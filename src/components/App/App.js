@@ -15,7 +15,7 @@ function App() {
 		<div className="App">
 			<Switch>
 				<Route exact path="/">
-					<Header loggedIn={false} />
+					<Header loggedIn={!false} />
 					<Main />
 					<Footer />
 				</Route>

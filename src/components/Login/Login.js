@@ -5,13 +5,13 @@ function Login() {
     <Form header="Рады видеть!" submit="Войти" question="Ещё не зарегистрированы?" link="Регистрация" path="/signup">
       <label className="form__item">
         <p className="form__item-text">E-mail</p>
-        <input type="email" className="form__field" defaultValue="test@ytest.ru" required />
+        <input type="email" className="form__field" defaultValue="test@ytest.ru" placeholder="test@ytest.ru" required />
         <p className="form__error">Что-то пошло не так...</p>
       </label>
 
       <label className="form__item">
         <p className="form__item-text">Пароль</p>
-        <input type="password" className="form__field form__field_color-error" required />
+        <input type="password" className="form__field form__field_color-error" placeholder="Пароль" required />
         <p className="form__error form__error-display">Что-то пошло не так...</p>
       </label>
     </Form>

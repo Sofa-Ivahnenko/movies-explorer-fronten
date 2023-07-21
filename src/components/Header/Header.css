@@ -2,7 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 11px 70px;
+	padding: 18px 70px;
+	max-height: 36px;
 }
 
 .header__link {

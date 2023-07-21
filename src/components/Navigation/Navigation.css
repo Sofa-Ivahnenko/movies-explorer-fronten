@@ -4,12 +4,12 @@
 
 .navigation__btn-menu {
 	display: none;
-	margin-left: auto;
-	padding: 0;
-	width: 40px;
-	height: 43px;
-	outline: none;
-	border: none;
+	margin-left: 376px;
+    padding: 0;
+    width: 40px;
+    height: 38px;
+    outline: none;
+    border: none;
 	background: transparent url('../../images/icon-menu.svg') center center / cover no-repeat;
 	transition: opacity .2s linear;
 }
@@ -29,7 +29,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	margin: 0px 22px 0px 0px;
+	margin: 7px 18px 0px 0px;
 }
 
 .navigation__btn-close {
@@ -38,6 +38,7 @@
 	padding: 0;
 	width: 22px;
 	height: 22px;
+	margin-left: 10px;
 	outline: none;
 	border: none;
 	background: transparent url('../../images/icon-close.svg') center center / 32px no-repeat;
@@ -61,7 +62,7 @@
 }
 
 .navigation__list-item:last-child {
-	margin: 0;
+	padding-bottom: 6px;
 }
 
 .navigation__list-item_type_main {
@@ -93,10 +94,11 @@
 	align-items: center;
 	font-weight: 500;
 	width: 80px;
-	height: 32px;
+	height: 30px;
 	margin: 0;
+
 	font-size: 14px;
-	padding: 0px 30px 0px 0px;
+	padding: 0px 33px 0px 0px;
 }
 
 .navigation__link_type_profile::before {
@@ -150,11 +152,12 @@
 	.navigation__list {
 		flex-direction: column;
 		margin: 110px auto 0;
+		padding-left: 11px;
 		align-items: center;
 	}
 
 	.navigation__list-item {
-		margin: 0 0 28px;
+		margin: 0 0 23px;
 	}
 
 	.navigation__list-item_type_main {
@@ -174,19 +177,44 @@
 	}
 
 	.navigation__link_type_profile {
+		font-size: 14px;
 		position: absolute;
-		bottom: 99px;
+		bottom: 67px;
+		margin-right: 8px;
 		padding: 0px 40px 0px 0px;
 	}
 }
 
 @media screen and (max-width: 450px) {
+
+	.navigation__btn-close {
+		margin-right: 108px;
+	}
+
+	.navigation__sidebar
+	{
+		height: 172vh;
+	}
+
+	.navigation__link_type_profile {
+		position: absolute;
+		font-size: 14px;
+		top: 710px;
+		left: 208px;
+		margin-right: 8px;
+	}
+
+	.navigation__link_type_profile::before {
+		width: 43px;
+	}
+
 	.navigation__list {
 		margin: 105px auto 0;
 	}
 
 	.navigation__sidebar {
 		padding: 18px 18px 46px;
+		width: 200%;
 	}
 
 	.navigation__list-item {

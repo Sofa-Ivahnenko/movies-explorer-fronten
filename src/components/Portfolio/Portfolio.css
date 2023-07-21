@@ -1,5 +1,5 @@
 .portfolio {
-  padding: 0 70px 125px;
+  padding: 0 70px 152px;
 }
 
 .portfolio__header {
@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 800px) {
   .portfolio {
-    padding: 0 50px 90px;
+    padding: 0 52px 90px;
   }
 
   .portfolio__header {
