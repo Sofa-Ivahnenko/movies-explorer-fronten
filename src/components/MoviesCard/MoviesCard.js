@@ -15,7 +15,7 @@ const MoviesCard = ({ card }) => {
 		<li className="card">
 			<img src={card.image} alt={card.title} className="card__image"></img>
 			<div className="card__element">
-				<h2 className="card__title">{card.title}</h2>
+				<p className="card__title">{card.title}</p>
 				<div className="card__buttons">
 					{pathname === '/saved-movies' ? (
 						<button type="button" className="card__button card__button_delete" />

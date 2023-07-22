@@ -5,7 +5,7 @@ function Register() {
     <Form header="Добро пожаловать!" submit="Зарегистрироваться" question="Уже зарегистрированы?" link="Войти" path="/signin">
       <label className="form__item">
         <p className="form__item-text">Имя</p>
-        <input type="text" className="form__field" defaultValue="Виталий" placeholder="Виталий" minLength={2} maxLength={10} required />
+        <input type="text" className="form__field" defaultValue="Виталий" placeholder="Виталий" minLength={2} maxLength={12} required />
         <p className="form__error">Что-то пошло не так...</p>
       </label>
 

@@ -11,7 +11,7 @@ function Login() {
 
       <label className="form__item">
         <p className="form__item-text">Пароль</p>
-        <input type="password" className="form__field form__field_color-error" placeholder="Пароль" required />
+        <input type="password" className="form__field form__field_color-error" placeholder="пароль" required />
         <p className="form__error form__error-display">Что-то пошло не так...</p>
       </label>
     </Form>
