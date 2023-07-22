@@ -64,12 +64,12 @@
 }
 
 .card__button_active {
-	background: #f9f9f9 url('../../images/icon-saved-active.svg') center / 14px no-repeat;
+	background: #FFFFFF url('../../images/icon-saved-active.svg') center / 14px no-repeat;
 
 }
 
 .card__button_delete {
-	background: #fff url('../../images/icon-delete.svg') center no-repeat;
+	background: #FFFFFF url('../../images/icon-delete.svg') center no-repeat;
 	transform: scale(1);
 	transition: transform .4s ease 0s;
 }
