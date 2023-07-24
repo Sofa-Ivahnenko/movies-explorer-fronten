@@ -17,7 +17,7 @@ function Register() {
 
       <label className="form__item">
         <p className="form__item-text">Пароль</p>
-        <input type="password" className="form__field form__field_color-error" defaultValue="••••••••••••••" placeholder="••••••••••••••" required />
+        <input type="password" className="form__field form__field_color-error" minLength={3} maxLength={25} defaultValue="••••••••••••••" placeholder="••••••••••••••" required />
         <p className="form__error form__error-display">Что-то пошло не так...</p>
       </label>
     </Form>
