@@ -92,7 +92,7 @@ function App() {
 				.getToken(token)
 				.then((res) => {
 					if (res) {
-						setISLoggedIn(true);
+						setIsLoggedIn(true);
 						setEmailValue(res.email);
 						history.push('/movies');
 					}
