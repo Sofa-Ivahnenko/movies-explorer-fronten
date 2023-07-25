@@ -114,7 +114,7 @@
 	.card__title {
 		font-size: 12px;
 		line-height: 17px;
-		margin: 13px 0 17px 0px;
+		margin: 13px 0 17px 13px;
 	}
 
 	.card__image {

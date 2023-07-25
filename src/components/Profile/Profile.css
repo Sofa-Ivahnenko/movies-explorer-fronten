@@ -2,14 +2,13 @@
 	display: flex;
 	justify-content: center;
 }
-
-.profile__form {
-	max-width: 410px;
-	width: 100%;
+.profile_container{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 75px 0 0;
+	max-width: 410px;
+	width: 100%;
 }
 
 .profile__greeting {

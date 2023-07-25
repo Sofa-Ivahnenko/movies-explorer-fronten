@@ -6,6 +6,7 @@ const Profile = () => {
 
   return (
     <main className="profile">
+      <section className="profile_container">
       <form className="profile__form">
         <h3 className="profile__greeting">Привет, Виталий!</h3>
         <div className="profile__inputs">
@@ -18,11 +19,12 @@ const Profile = () => {
           </div>
           <p className="profile__text">E-mail</p>
         </div>
-        <form lassName="profile__form" action="/profile">
-            <button type="submit" className="profile__button" value="Редактировать" />
+        </form>
+        <form className="profile__form" action="/profile">
+            <input type="submit" className="profile__button" value="Редактировать" />
         </form>
         <Link to="/" className="profile__link">Выйти из аккаунта</Link>
-      </form>
+        </section>
     </main>
   );
 };
