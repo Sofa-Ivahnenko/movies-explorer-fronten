@@ -53,6 +53,12 @@
 	box-sizing: border-box;
 }
 
+.form__items {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
 .form__item-text {
 	font-size: 10px;
 	line-height: 12px;
@@ -80,9 +86,10 @@
 .form__field_color-error {
 	color: #ff3055;
 }
-
+.form__common-error {
+	color: #ff3055;
+}
 .form__error {
-	opacity: 0;
 	display: block;
 	margin: 10px 0 0;
 	color: #ff3055;
@@ -108,9 +115,14 @@
 	transition: opacity .2s linear;
 }
 
-.form__button:hover {
+.form__button:not(:disabled):hover {
 	opacity: .8;
 	cursor: pointer;
+}
+
+.form__button:disabled {
+	background: #F8F8F8;
+	color: #C2C2C2;
 }
 
 .form__text {
