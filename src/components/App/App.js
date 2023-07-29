@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, Switch } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -9,11 +9,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../../utils/ApiService';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = (fields, errorCallback) => {
     if (!fields.email || !fields.password || !fields.name) {
@@ -21,8 +23,42 @@ function App() {
     }
     return api.register(fields).then(setUser);
   };
-  console.log('user', user);
+
+  const handleLogin = (fields) => {
+    if (!fields.email || !fields.password) {
+      return;
+    }
+    return api.login(fields).then(setUser);
+  };
+
+  const handleEditProfile = (fields) => {
+    return api.setProfile(fields).then(({ data }) => {
+      setUser(data);
+    });
+  };
+
+  const handleLogout = () => {
+    api.removeToken();
+    navigate('/');
+    setUser(null);
+  };
+  useEffect(() => {
+    setIsLoading(true);
+    api
+      .checkToken()
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [navigate]);
+
   const isAuth = !!user;
+
   return (
     <div className="App">
       <main className="main">
@@ -67,7 +103,7 @@ function App() {
           <Route
             exact
             path="/signin"
-            element={<Login />}
+            element={<Login onLogin={handleLogin} />}
           />
           <Route
             exact
@@ -75,7 +111,11 @@ function App() {
             element={
               <>
                 <Header loggedIn={isAuth} />
-                <Profile />
+                <Profile
+                  onEdit={handleEditProfile}
+                  currentUser={user}
+                  onLogout={handleLogout}
+                />
               </>
             }
           />

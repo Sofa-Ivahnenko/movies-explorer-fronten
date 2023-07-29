@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 
-const useFormFields = (initial = {}) => {
-  const [values, setValues] = useState(initial);
+const useFormFields = () => {
+  const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
@@ -13,6 +13,9 @@ const useFormFields = (initial = {}) => {
     setValues({ ...values, [nameInput]: valueInput });
     setErrors({ ...errors, [nameInput]: input.validationMessage });
     setIsValid(input.closest('form').checkValidity());
+    if (nameInput === 'email' && !valueInput.includes('.')) {
+      setErrors({ ...errors, [nameInput]: 'Не корректный email' });
+    }
   }
 
   const resetForm = useCallback(
@@ -34,6 +37,6 @@ const useFormFields = (initial = {}) => {
     setErrors,
     setValues,
   };
-}
+};
 
 export default useFormFields;

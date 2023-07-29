@@ -18,10 +18,10 @@ function Register(props) {
     !!errors?.email ||
     !!errors?.password;
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     onRegister(values)
       .then(() => {
-        navigate(-1);
+        navigate('/movies');
       })
       .catch((err) => {
         console.error(err);
@@ -45,7 +45,6 @@ function Register(props) {
           <input
             type="text"
             className="form__field"
-            // defaultValue="Виталий"
             placeholder="Виталий"
             minLength={2}
             maxLength={12}
@@ -66,7 +65,6 @@ function Register(props) {
           <input
             type="email"
             className="form__field"
-            // defaultValue="test@test.ru"
             placeholder="test@test.ru"
             name="email"
             required
@@ -86,7 +84,6 @@ function Register(props) {
             className="form__field form__field_color-error"
             minLength={3}
             maxLength={25}
-            // defaultValue="••••••••••••••"
             placeholder="••••••••••••••"
             required
             name="password"
@@ -98,9 +95,6 @@ function Register(props) {
               {errors.password || 'Что-то пошло не так...'}
             </p>
           )}
-          {/* <p className="form__error form__error-display">
-            Что-то пошло не так...
-          </p> */}
         </div>
         {error && <p className="form__common-error">{error}</p>}
       </Form>

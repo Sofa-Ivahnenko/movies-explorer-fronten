@@ -14,11 +14,9 @@ class ApiService {
     const result = await response.json();
     if (result?.message === 'Validation failed') {
       const message = result?.validation?.body?.message;
-      return Promise.reject(`Произошла ошибка: ${message}`);
+      return Promise.reject(`Ошибка: ${message}`);
     }
-    return Promise.reject(
-      `Произошла ошибка: ${response.status} ${result?.message}`
-    );
+    return Promise.reject(`Ошибка: ${result?.message}`);
   }
 
   async _request(url, options) {
@@ -70,7 +68,7 @@ class ApiService {
     });
     this._token = result.token;
     localStorage.setItem('token', result.token);
-    return result;
+    return result.data;
   }
 
   async checkToken() {
