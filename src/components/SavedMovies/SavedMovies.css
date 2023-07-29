@@ -1,0 +1,15 @@
+.saved-movies {
+	flex: 1 0 auto;
+}
+
+@media all and (max-width: 800px) {
+	.saved-movies {
+		margin: 0px 0px 200px 0px;
+	}
+}
+
+@media all and (max-width: 450px) {
+	.saved-movies {
+		margin: 0px 0px 115px 0px;
+	}
+}
