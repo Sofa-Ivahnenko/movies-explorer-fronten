@@ -11,6 +11,7 @@ import Preloader from '../Preloader/Preloader';
 function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [filterMovies, setFilterMovies] = useState([]);
   const [filter, setFilter] = useState(() => {
     const savedFilter = window.localStorage.getItem('filter');
     const result = JSON.parse(savedFilter);
@@ -26,9 +27,19 @@ function Movies() {
     setIsLoading(true);
     moviesApi
       .getAllMovies()
-      .then(setMovies)
+      .then((data) => {
+        setMovies(data);
+      })
       .then(() => setIsLoading(false));
   }, []);
+
+  useEffect(() => {
+    handleSearch(filter);
+  }, [movies]);
+
+  useEffect(() => {
+    handleSearch(filter);
+  }, [filter.isShortMovies]);
 
   useEffect(() => {
     window.localStorage.setItem('filter', JSON.stringify(filter));
@@ -38,17 +49,19 @@ function Movies() {
     return !!filter.searchText || filter.isShortMovies;
   }, [filter]);
 
-  const filterMovies = useMemo(() => {
-    return searchMoviesByText(movies, filter.searchText).filter((movie) =>
-      filter.isShortMovies ? movie.duration < 40 : true
+  const handleSearch = () => {
+    const result = searchMoviesByText(movies, filter.searchText).filter(
+      (movie) => (filter.isShortMovies ? movie.duration < 40 : true)
     );
-  }, [movies, filter]);
+    setFilterMovies(result);
+  };
 
   return (
     <main className="movies">
       <SearchForm
         filter={filter}
         onChangeFilter={setFilter}
+        onSearch={handleSearch}
       />
       {isLoading ? (
         <Preloader />

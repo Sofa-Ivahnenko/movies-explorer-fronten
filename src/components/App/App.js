@@ -12,6 +12,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import { useEffect, useState } from 'react';
 import { api } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,7 +42,7 @@ function App() {
   };
 
   const handleEditProfile = (fields) => {
-    return api.setProfile(fields).then(({ data }) => {
+    return api.setProfile(fields).then((data) => {
       setUser(data);
     });
   };

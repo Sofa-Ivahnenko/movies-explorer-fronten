@@ -3,11 +3,15 @@ import { useLocation } from 'react-router-dom';
 import Toggle from '../CheckBox/CheckBox';
 
 const SearchForm = (props) => {
-  const { filter, onChangeFilter } = props;
+  const { filter, onChangeFilter, onSearch } = props;
   const { pathname } = useLocation();
   return (
     <section className="search-form">
       <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSearch();
+        }}
         className={`search ${
           pathname !== '/movies' ? '/saved-movies' : 'search_saved'
         }`}
@@ -17,7 +21,6 @@ const SearchForm = (props) => {
             className="search__input"
             placeholder="Фильм"
             type="text"
-            required
             value={filter?.searchText || ''}
             onChange={(evevt) =>
               onChangeFilter({ ...filter, searchText: evevt.target.value })

@@ -1,22 +1,19 @@
 import { useState } from 'react';
 import useFormFields from '../../hooks/useFormFields';
 import Form from '../Form/Form';
-import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
   const { onLogin } = props;
   const { values, handleChange, errors } = useFormFields();
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const isDisable =
     !values.email || !values.password || !!errors?.email || !!errors?.password;
 
   const handleSubmit = async () => {
-    onLogin(values)
-      .catch((err) => {
-        console.error(err);
-        setError(err);
-      });
+    onLogin(values).catch((err) => {
+      console.error(err);
+      setError(err);
+    });
   };
 
   return (
