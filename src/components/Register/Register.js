@@ -21,7 +21,7 @@ function Register(props) {
   const handleSubmit = () => {
     onRegister(values)
       .then(() => {
-        navigate('/signin');
+        navigate('/movies');
       })
       .catch((err) => {
         console.error(err);

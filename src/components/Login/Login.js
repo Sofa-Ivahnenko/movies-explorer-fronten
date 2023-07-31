@@ -13,9 +13,6 @@ function Login(props) {
 
   const handleSubmit = async () => {
     onLogin(values)
-      .then(() => {
-        navigate('/movies');
-      })
       .catch((err) => {
         console.error(err);
         setError(err);

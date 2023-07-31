@@ -1,4 +1,4 @@
-import { API_URL } from './config';
+import { API_URL, MOVIES_API_URL } from './config';
 
 class MainApi {
   _token = null;
@@ -44,7 +44,7 @@ class MainApi {
     }
   }
 
-  async register(body) {
+  register = async (body) => {
     const result = await this._request(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: {
@@ -52,14 +52,14 @@ class MainApi {
       },
       body: JSON.stringify(body),
     });
-    this._token = result.token;
-    if (result.token) {
-      localStorage.setItem('token', result.token);
+    this._token = result?.token;
+    if (result?.token) {
+      localStorage.setItem('token', result?.token);
     }
-    return result?.data;
-  }
+    return result?.user;
+  };
 
-  async login(body) {
+  login = async (body) => {
     const result = await this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: {
@@ -71,21 +71,24 @@ class MainApi {
       }),
     });
     this._token = result.token;
-    localStorage.setItem('token', result.token);
-    return result.data;
-  }
+    if (result?.token) {
+      localStorage.setItem('token', result?.token);
+    }
+    return result.user;
+  };
 
   async checkToken() {
     if (!this._token) {
       throw new Error('Токен не задан');
     }
-    return this._request(`${this._baseUrl}/users/me`, {
+    const result = this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${this._token}`,
         'Content-Type': 'application/json',
       },
     });
+    return result;
   }
 
   async getProfile() {
@@ -121,10 +124,9 @@ class MainApi {
         duration: obj.duration,
         year: obj.year,
         description: obj.description,
-        image: 'https://api.nomoreparties.co' + obj.image.url,
+        image: MOVIES_API_URL + obj.image.url,
         trailerLink: obj.trailerLink,
-        thumbnail:
-          'https://api.nomoreparties.co' + obj.image.formats.thumbnail.url,
+        thumbnail: MOVIES_API_URL + obj.image.formats.thumbnail.url,
         movieId: obj.id,
         nameRU: obj.nameRU,
         nameEN: obj.nameEN,

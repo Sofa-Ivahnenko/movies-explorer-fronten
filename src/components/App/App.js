@@ -18,18 +18,26 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleRegister = (fields, errorCallback) => {
+  const handleRegister = (fields) => {
     if (!fields.email || !fields.password || !fields.name) {
       return;
     }
-    return api.register(fields).then(setUser);
+    return api.register(fields).then((user) => {
+      setUser(user);
+      navigate('/movies');
+    });
   };
 
   const handleLogin = (fields) => {
     if (!fields.email || !fields.password) {
       return;
     }
-    return api.login(fields).then(setUser);
+    return api
+      .login(fields)
+      .then(setUser)
+      .then(() => {
+        navigate('/movies');
+      });
   };
 
   const handleEditProfile = (fields) => {
@@ -43,12 +51,13 @@ function App() {
     navigate('/');
     setUser(null);
   };
+
   useEffect(() => {
     setIsLoading(true);
     api
       .checkToken()
-      .then(({ data }) => {
-        setUser(data);
+      .then((user) => {
+        setUser(user);
       })
       .catch((err) => {
         console.error(err);
