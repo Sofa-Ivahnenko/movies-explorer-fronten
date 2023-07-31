@@ -1,34 +1,72 @@
 import './MoviesCardList.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
 
-const MoviesCardList = ({ cards, buttonMore }) => {
-	const [isLoading, setLoading] = useState(false);
+const MoviesCardList = ({ cards = [], isCanLoadMore }) => {
+  const [showCount, setShowCount] = useState(0);
 
-	const handlePreloader = () => {
-		setLoading(true);
-	};
+  const canLoadMore = isCanLoadMore && showCount < cards.length;
 
-	return (
-		<section className="cards">
-			<ul className="cards__list">
-				{cards.map((card) => (
-					<MoviesCard key={card.id} card={card} />
-				))}
-			</ul>
+  useEffect(() => {
+    shownCount();
+  }, []);
+  function shownCount() {
+    const display = window.innerWidth;
+    if (display > 1180) {
+      setShowCount(15);
+    } else if (display > 1023) {
+      setShowCount(12);
+    } else if (display > 800) {
+      setShowCount(8);
+    } else if (display < 800) {
+      setShowCount(5);
+    }
+  }
 
-			{isLoading ? (
-				<Preloader />
-			) : (
-				buttonMore && (
-					<div className="cards__button-container">
-						<button className="cards__button" type="button" name="more" onClick={handlePreloader}>Ещё</button>
-					</div>
-				)
-			)}
-		</section>
-	);
+  useEffect(() => {
+    window.addEventListener('resize', shownCount);
+    return () => window.removeEventListener('resize', shownCount);
+  });
+
+  const handleLoadMore = () => {
+    const display = window.innerWidth;
+    if (display > 1180) {
+      setShowCount((value) => value + 3);
+    } else if (display > 1023) {
+      setShowCount((value) => value + 3);
+    } else if (display < 1023) {
+      setShowCount((value) => value + 2);
+    }
+  };
+  const Cards = cards.slice(0, showCount);
+  return (
+    <section className="cards">
+      {Cards.length ? (
+        <ul className="cards__list">
+          {Cards.map((card) => (
+            <MoviesCard
+              key={card.id}
+              card={card}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div className='cards__placeholder'>Ничего не найдено</div>
+      )}
+      {canLoadMore && (
+        <div className="cards__button-container">
+          <button
+            className="cards__button"
+            type="button"
+            name="more"
+            onClick={handleLoadMore}
+          >
+            Ещё
+          </button>
+        </div>
+      )}
+    </section>
+  );
 };
 
 export default MoviesCardList;

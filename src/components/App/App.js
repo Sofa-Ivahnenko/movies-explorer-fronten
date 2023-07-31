@@ -10,7 +10,8 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { useEffect, useState } from 'react';
-import { api } from '../../utils/ApiService';
+import { api } from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -75,50 +76,58 @@ function App() {
             }
           />
           <Route
-            path="/movies"
-            element={
-              <>
-                <Header loggedIn={isAuth} />
-                <Movies />
-                <Footer />
-              </>
-            }
-          />
+            element={<ProtectedRoute isLogged={isLoading ? true : isAuth} />}
+          >
+            <Route
+              path="/movies"
+              element={
+                <>
+                  <Header loggedIn={isAuth} />
+                  <Movies />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/saved-movies"
+              element={
+                <>
+                  <Header loggedIn={isAuth} />
+                  <SavedMovies />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/profile"
+              element={
+                <>
+                  <Header loggedIn={isAuth} />
+                  <Profile
+                    onEdit={handleEditProfile}
+                    currentUser={user}
+                    onLogout={handleLogout}
+                  />
+                </>
+              }
+            />
+          </Route>
           <Route
-            exact
-            path="/saved-movies"
-            element={
-              <>
-                <Header loggedIn={isAuth} />
-                <SavedMovies />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/signup"
-            element={<Register onRegister={handleRegister} />}
-          />
-          <Route
-            exact
-            path="/signin"
-            element={<Login onLogin={handleLogin} />}
-          />
-          <Route
-            exact
-            path="/profile"
-            element={
-              <>
-                <Header loggedIn={isAuth} />
-                <Profile
-                  onEdit={handleEditProfile}
-                  currentUser={user}
-                  onLogout={handleLogout}
-                />
-              </>
-            }
-          />
+            element={<ProtectedRoute isLogged={isLoading ? true : !isAuth} />}
+          >
+            <Route
+              exact
+              path="/signup"
+              element={<Register onRegister={handleRegister} />}
+            />
+            <Route
+              exact
+              path="/signin"
+              element={<Login onLogin={handleLogin} />}
+            />
+          </Route>
           <Route
             path="*"
             element={<PageNotFound />}

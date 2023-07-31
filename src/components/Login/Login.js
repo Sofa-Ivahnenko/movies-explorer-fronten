@@ -55,7 +55,9 @@ function Login(props) {
           <p className="form__item-text">Пароль</p>
           <input
             type="password"
-            className="form__field form__field_color-error"
+            className={`form__field ${
+              errors.password ? 'form__field_color-error' : ''
+            }`}
             minLength={3}
             maxLength={25}
             placeholder="пароль"
