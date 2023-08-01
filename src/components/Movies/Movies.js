@@ -1,9 +1,7 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-// import cards from '../../utils/Movies';
 import { useEffect, useMemo, useState } from 'react';
-// import { api } from '../../utils/ApiService';
 import { moviesApi } from '../../utils/MoviesApi';
 import { searchMoviesByText } from '../../utils/searchMoviesByText';
 import Preloader from '../Preloader/Preloader';

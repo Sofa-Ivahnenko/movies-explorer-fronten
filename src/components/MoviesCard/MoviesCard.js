@@ -1,18 +1,36 @@
 import './MoviesCard.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { durationConverter } from '../../utils/durationConverter';
 import { MOVIES_API_URL } from '../../utils/config';
+import { api } from '../../utils/MainApi';
+import { SaveContext } from '../App/App';
 
 const MoviesCard = ({ card }) => {
-  const [favorite, setFavorite] = React.useState(false);
+  const { list, onChange } = useContext(SaveContext);
+  const savedCard = list.find((item) => item.movieId === card.id);
 
   function handleFavoriteToogle() {
-    setFavorite(!favorite);
+    if (savedCard) {
+      handleRemove(savedCard?._id);
+    } else {
+      api.addNewCard(card).then(({ data }) => {
+        onChange([...list, data]);
+      });
+    }
   }
 
-  const { pathname } = useLocation();
+  const handleRemove = (id) => {
+    return api.deleteCard(id).then(() => {
+      const updateList = list
+        .filter((item) => item.movieId !== card.id)
+        .filter((item) => item.movieId !== card.movieId);
+      onChange(updateList);
+    });
+  };
 
+  const { pathname } = useLocation();
+  console.log(savedCard);
   return (
     <li className="card">
       <a
@@ -23,7 +41,11 @@ const MoviesCard = ({ card }) => {
         <img
           className="card__image"
           alt={card.nameRU}
-          src={MOVIES_API_URL + card.image.url}
+          src={
+            typeof card?.image === 'string'
+              ? card?.image
+              : MOVIES_API_URL + card.image.url
+          }
         />
       </a>
       <div className="card__element">
@@ -31,6 +53,7 @@ const MoviesCard = ({ card }) => {
         <div className="card__buttons">
           {pathname === '/saved-movies' ? (
             <button
+              onClick={() => handleRemove(card._id)}
               type="button"
               className="card__button card__button_delete"
             />
@@ -38,7 +61,7 @@ const MoviesCard = ({ card }) => {
             <button
               type="button"
               className={`card__button card__button${
-                favorite ? '_active' : '_inactive'
+                savedCard ? '_active' : '_inactive'
               }`}
               onClick={handleFavoriteToogle}
             />

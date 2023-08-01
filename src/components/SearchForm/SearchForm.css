@@ -2,14 +2,14 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 44px 0 96px;
+    margin: 0 70px 0;
 	padding: 65px 0 29px;
 	margin-bottom: 15px;
 	border-bottom: 1px solid #e8e8e8;
 }
 
 .search_saved {
-	margin: 0 70px 0;
+    margin: 0 70px 0;
 }
 
 .search__container {
