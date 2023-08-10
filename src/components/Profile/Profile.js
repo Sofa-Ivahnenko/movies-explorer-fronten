@@ -7,6 +7,7 @@ const Profile = (props) => {
   const { values, handleChange, errors, resetForm } = useFormFields();
   const [isEditMode, setIsEditMode] = useState(false);
   const [error, setError] = useState('');
+  const [isSuccesSave, setIsSuccesSave] = useState(false);
 
   const isNewDate =
     values?.name !== currentUser?.name || values?.email !== currentUser?.email;
@@ -22,12 +23,21 @@ const Profile = (props) => {
       .then(() => {
         setIsEditMode(false);
         setError('');
+        setIsSuccesSave(true);
       })
       .catch((err) => {
         console.error(err);
         setError(err);
       });
   };
+
+  useEffect(() => {
+    if (isSuccesSave) {
+      setTimeout(() => {
+        setIsSuccesSave(false);
+      }, 4000);
+    }
+  }, [isSuccesSave]);
 
   useEffect(() => {
     if (currentUser) {
@@ -39,7 +49,7 @@ const Profile = (props) => {
     <main className="profile">
       <section className="profile_container">
         <form className="profile__form">
-          <h3 className="profile__greeting">{`Привет, ${currentUser.name}!`}</h3>
+          <h3 className="profile__greeting">Привет, {currentUser?.name}</h3>
           <div className="profile__inputs">
             <p className="profile__text">Имя</p>
             <div className="profile__area profile__area_type_name">
@@ -72,6 +82,9 @@ const Profile = (props) => {
           </div>
         </form>
         <div className="profile__edit-controller">
+          {isSuccesSave && (
+            <div className="profile__success-message">Данные сохранены</div>
+          )}
           {error && <p className="form__common-error">{error}</p>}
           {isEditMode ? (
             <>
@@ -98,7 +111,10 @@ const Profile = (props) => {
           ) : (
             <>
               <button
-                onClick={() => setIsEditMode(true)}
+                onClick={() => {
+                  setIsEditMode(true);
+                  setIsSuccesSave(false);
+                }}
                 className="profile__button"
               >
                 Редактировать
