@@ -49,7 +49,7 @@ const Profile = (props) => {
     <main className="profile">
       <section className="profile_container">
         <form className="profile__form">
-          <h3 className="profile__greeting">Привет, {currentUser?.name}</h3>
+          <h3 className="profile__greeting">{`Привет, ${currentUser.name}!`}</h3>
           <div className="profile__inputs">
             <p className="profile__text">Имя</p>
             <div className="profile__area profile__area_type_name">
