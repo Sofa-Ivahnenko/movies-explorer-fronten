@@ -7,9 +7,15 @@ import { searchMoviesByText } from '../../utils/searchMoviesByText';
 const SavedMovies = (props) => {
   const { movies = [] } = props;
   const [filterMovies, setFilterMovies] = useState(movies);
-  const [filter, setFilter] = useState({
-    searchText: '',
-    isShortMovies: false,
+  const [filter, setFilter] = useState(() => {
+    const savedFilter = window.localStorage.getItem('save-filter');
+    const result = JSON.parse(savedFilter);
+    return (
+      result || {
+        searchText: '',
+        isShortMovies: false,
+      }
+    );
   });
 
   useEffect(() => {
@@ -19,6 +25,10 @@ const SavedMovies = (props) => {
   useEffect(() => {
     handleSearch(filter);
   }, [filter.isShortMovies]);
+
+  useEffect(() => {
+    window.localStorage.setItem('save-filter', JSON.stringify(filter));
+  }, [filter]);
 
   const handleSearch = () => {
     const result = searchMoviesByText(movies, filter.searchText).filter(

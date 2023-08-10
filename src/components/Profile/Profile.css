@@ -159,11 +159,6 @@
 	text-align: center;
 }
 
-.profile__success-message {
-	color: green;
-	margin-bottom: 30px;
-}
-
 @media all and (max-width: 800px) {
 	.profile__form {
 		padding: 236px 0 0;

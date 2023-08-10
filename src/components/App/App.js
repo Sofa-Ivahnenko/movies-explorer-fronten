@@ -56,10 +56,14 @@ function App() {
 
   const handleLogout = () => {
     api.removeToken();
-    window.localStorage.removeItem('filter');
-    setSaveMovies([]);
-    navigate('/');
+    setLoggedIn(false);
+    setEmailValue(null);
     setUser(null);
+    setSaveMovies([]);
+    navigate('/signin');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('filter');
+    localStorage.removeItem('savedMovies');
   };
 
   useEffect(() => {
@@ -139,19 +143,15 @@ function App() {
               />
             </Route>
             <Route
-              element={<ProtectedRoute isLogged={isLoading ? true : !isAuth} />}
-            >
-              <Route
-                exact
-                path="/signup"
-                element={<Register onRegister={handleRegister} />}
-              />
-              <Route
-                exact
-                path="/signin"
-                element={<Login onLogin={handleLogin} />}
-              />
-            </Route>
+              exact
+              path="/signup"
+              element={<Register onRegister={handleRegister} />}
+            />
+            <Route
+              exact
+              path="/signin"
+              element={<Login onLogin={handleLogin} />}
+            />
             <Route
               path="*"
               element={<PageNotFound />}
