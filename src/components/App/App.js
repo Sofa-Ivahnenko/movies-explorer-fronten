@@ -56,8 +56,14 @@ function App() {
 
   const handleLogout = () => {
     api.removeToken();
-    navigate('/');
+    setLoggedIn(false);
+    setEmailValue(null);
     setUser(null);
+    setSaveMovies([]);
+    navigate('/signin');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('filter');
+    localStorage.removeItem('savedMovies');
   };
 
   useEffect(() => {
