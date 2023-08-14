@@ -7,6 +7,7 @@ import Form from '../Form/Form';
 function Register(props) {
   const { onRegister } = props;
   const { values, handleChange, errors } = useFormFields();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ function Register(props) {
     !!errors?.password;
 
   const handleSubmit = () => {
+    setIsLoading(true);
     onRegister(values)
       .then(() => {
         navigate('/movies');
@@ -26,6 +28,9 @@ function Register(props) {
       .catch((err) => {
         console.error(err);
         setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -52,6 +57,7 @@ function Register(props) {
             name="name"
             onChange={handleChange}
             value={values.name}
+            disabled={isLoading}
           />
           {errors.name && (
             <p className="form__error">
@@ -70,6 +76,7 @@ function Register(props) {
             required
             onChange={handleChange}
             value={values.email}
+            disabled={isLoading}
           />
           {errors.email && (
             <p className="form__error">
@@ -81,7 +88,9 @@ function Register(props) {
           <p className="form__item-text">Пароль</p>
           <input
             type="password"
-            className="form__field form__field_color-error"
+            className={`form__field ${
+              errors.password ? 'form__field_color-error' : ''
+            }`}
             minLength={3}
             maxLength={25}
             placeholder="••••••••••••••"
@@ -89,6 +98,7 @@ function Register(props) {
             name="password"
             onChange={handleChange}
             value={values.password}
+            disabled={isLoading}
           />
           {errors.password && (
             <p className="form__error">

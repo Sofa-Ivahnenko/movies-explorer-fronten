@@ -1,11 +1,17 @@
 import './SearchForm.css';
 import { useLocation } from 'react-router-dom';
+import Toggle from '../CheckBox/CheckBox';
 
-const SearchForm = () => {
+const SearchForm = (props) => {
+  const { filter, onChangeFilter, onSearch } = props;
   const { pathname } = useLocation();
   return (
     <section className="search-form">
       <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSearch();
+        }}
         className={`search ${
           pathname !== '/movies' ? '/saved-movies' : 'search_saved'
         }`}
@@ -15,32 +21,32 @@ const SearchForm = () => {
             className="search__input"
             placeholder="Фильм"
             type="text"
-            required
+            value={filter?.searchText || ''}
+            onChange={(evevt) =>
+              onChangeFilter({ ...filter, searchText: evevt.target.value })
+            }
           />
           <button
             type="submit"
             className="search__button"
           ></button>
-          <div className="search__toggle">
-            <div className="search__tumbler">
-              <input
-                type="checkbox"
-                className="search__checkbox"
-              />
-              <span className="search__slider" />
-            </div>
-            <p className="search__films">Короткометражки</p>
-          </div>
+          <Toggle
+            className="search__checkbox"
+            value={filter?.isShortMovies}
+            onChange={(value) =>
+              onChangeFilter({ ...filter, isShortMovies: value })
+            }
+          />
         </div>
         <div className="search__toggle search__toggle-update">
-          <div className="search__tumbler">
-            <input
-              type="checkbox"
-              className="search__checkbox"
-            />
-            <span className="search__slider" />
-          </div>
-          <p className="search__films">Короткометражки</p>
+          <Toggle
+            className="search__checkbox_mobile"
+            value={filter?.isShortMovies}
+            onChange={(value) => {
+              console.log(value);
+              onChangeFilter({ ...filter, isShortMovies: value });
+            }}
+          />
         </div>
       </form>
     </section>

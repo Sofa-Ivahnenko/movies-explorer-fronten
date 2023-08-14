@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import useFormFields from '../../hooks/useFormFields';
 import Form from '../Form/Form';
-import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
   const { onLogin } = props;
   const { values, handleChange, errors } = useFormFields();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const isDisable =
     !values.email || !values.password || !!errors?.email || !!errors?.password;
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     onLogin(values)
-      .then(() => {
-        navigate('/movies');
-      })
       .catch((err) => {
         console.error(err);
         setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -36,6 +36,7 @@ function Login(props) {
         <div className="form__item">
           <p className="form__item-text">E-mail</p>
           <input
+            disabled={isLoading}
             type="email"
             className="form__field"
             // defaultValue="test@test.ru"
@@ -54,8 +55,11 @@ function Login(props) {
         <div className="form__item">
           <p className="form__item-text">Пароль</p>
           <input
+            disabled={isLoading}
             type="password"
-            className="form__field form__field_color-error"
+            className={`form__field ${
+              errors.password ? 'form__field_color-error' : ''
+            }`}
             minLength={3}
             maxLength={25}
             placeholder="пароль"
