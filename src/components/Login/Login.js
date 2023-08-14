@@ -5,15 +5,21 @@ import Form from '../Form/Form';
 function Login(props) {
   const { onLogin } = props;
   const { values, handleChange, errors } = useFormFields();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const isDisable =
     !values.email || !values.password || !!errors?.email || !!errors?.password;
 
   const handleSubmit = async () => {
-    onLogin(values).catch((err) => {
-      console.error(err);
-      setError(err);
-    });
+    setIsLoading(true);
+    onLogin(values)
+      .catch((err) => {
+        console.error(err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -30,6 +36,7 @@ function Login(props) {
         <div className="form__item">
           <p className="form__item-text">E-mail</p>
           <input
+            disabled={isLoading}
             type="email"
             className="form__field"
             // defaultValue="test@test.ru"
@@ -48,6 +55,7 @@ function Login(props) {
         <div className="form__item">
           <p className="form__item-text">Пароль</p>
           <input
+            disabled={isLoading}
             type="password"
             className={`form__field ${
               errors.password ? 'form__field_color-error' : ''

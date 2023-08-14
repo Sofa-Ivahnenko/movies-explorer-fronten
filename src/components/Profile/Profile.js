@@ -8,6 +8,7 @@ const Profile = (props) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [error, setError] = useState('');
   const [isSuccesSave, setIsSuccesSave] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isNewDate =
     values?.name !== currentUser?.name || values?.email !== currentUser?.email;
@@ -19,6 +20,7 @@ const Profile = (props) => {
     !isNewDate;
 
   const hanldeEdit = () => {
+    setIsLoading(true);
     onEdit(values)
       .then(() => {
         setIsEditMode(false);
@@ -28,6 +30,9 @@ const Profile = (props) => {
       .catch((err) => {
         console.error(err);
         setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -63,7 +68,7 @@ const Profile = (props) => {
                 name="name"
                 onChange={handleChange}
                 required
-                disabled={!isEditMode}
+                disabled={!isEditMode || isLoading}
               />
             </div>
             <div className="profile__area profile__area_type_email">
@@ -75,7 +80,7 @@ const Profile = (props) => {
                 defaultValue={currentUser?.email || ''}
                 onChange={handleChange}
                 value={values.email}
-                disabled={!isEditMode}
+                disabled={!isEditMode || isLoading}
               />
             </div>
             <p className="profile__text">E-mail</p>
