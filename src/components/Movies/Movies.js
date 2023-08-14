@@ -66,7 +66,7 @@ function Movies() {
       ) : (
         <MoviesCardList
           cards={filterMovies}
-          isCanLoadMore={!isSearchMode}
+          // isCanLoadMore={!isSearchMode}
         />
       )}
     </main>

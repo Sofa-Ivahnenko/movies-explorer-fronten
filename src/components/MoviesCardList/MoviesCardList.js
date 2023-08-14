@@ -2,14 +2,19 @@ import './MoviesCardList.css';
 import React, { useEffect, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-const MoviesCardList = ({ cards = [], isCanLoadMore }) => {
+const MoviesCardList = ({ cards = [], isCanLoadMore = true }) => {
   const [showCount, setShowCount] = useState(0);
 
   const canLoadMore = isCanLoadMore && showCount < cards.length;
 
   useEffect(() => {
+    setShowCount(9);
+  }, [cards]);
+
+  useEffect(() => {
     shownCount();
   }, []);
+
   function shownCount() {
     const display = window.innerWidth;
     if (display > 1180) {
@@ -38,7 +43,9 @@ const MoviesCardList = ({ cards = [], isCanLoadMore }) => {
       setShowCount((value) => value + 2);
     }
   };
+
   const Cards = cards.slice(0, showCount);
+
   return (
     <section className="cards">
       {Cards.length ? (
@@ -51,7 +58,7 @@ const MoviesCardList = ({ cards = [], isCanLoadMore }) => {
           ))}
         </ul>
       ) : (
-        <div className='cards__placeholder'>Ничего не найдено</div>
+        <div className="cards__placeholder">Ничего не найдено</div>
       )}
       {canLoadMore && (
         <div className="cards__button-container">
